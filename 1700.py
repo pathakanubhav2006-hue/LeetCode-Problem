@@ -9,7 +9,6 @@ class Solution(object):
                 return (len(sandwiches)-i)
 
             d[sandwiches[i]]=-1
-        return 0
 
 
         
