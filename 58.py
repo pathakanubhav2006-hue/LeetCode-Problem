@@ -1,9 +1,12 @@
 class Solution(object):
-    def lengthOfLastWord(self, s):
-        word = s.split() 
-        if not word:
-            return 0
-            
-        return len(word[-1])
-
+    def reverseString(self, s):
+        return s.reverse()
+    
+class Solution(object):
+    def reverseString(self, s):
+        left, right = 0, len(s) - 1
+        while left < right:
+            s[left], s[right] = s[right], s[left]
+            left += 1
+            right -= 1
         
