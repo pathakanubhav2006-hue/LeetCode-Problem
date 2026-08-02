@@ -1,24 +1,19 @@
 class Solution(object):
     def maxProfit(self, prices):
-        memo = {}
+        if not prices:
+            return 0
 
-        def dfs(i, canBuy):
-            if i >= len(prices):
-                return 0
+        hold = -prices[0]
+        sold = 0
+        rest = 0
 
-            if (i, canBuy) in memo:
-                return memo[(i, canBuy)]
+        for i in range(1, len(prices)):
+            prev_hold = hold
+            prev_sold = sold
+            prev_rest = rest
 
-            if canBuy:
-                buy = -prices[i] + dfs(i + 1, False)
-                skip = dfs(i + 1, True)
-                ans = max(buy, skip)
-            else:
-                sell = prices[i] + dfs(i + 2, True)   # cooldown
-                hold = dfs(i + 1, False)
-                ans = max(sell, hold)
+            hold = max(prev_hold, prev_rest - prices[i])
+            sold = prev_hold + prices[i]
+            rest = max(prev_rest, prev_sold)
 
-            memo[(i, canBuy)] = ans
-            return ans
-
-        return dfs(0, True)
+        return max(sold, rest)
