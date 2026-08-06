@@ -1,17 +1,15 @@
 class Solution(object):
     def addToArrayForm(self, num, k):
-        s = ""
-        for i in range(len(num)):
-            s += str(num[i])
+        i = len(num) - 1
 
-        n = int(s) + k
+        while i >= 0 or k > 0:
+            if i >= 0:
+                k += num[i]
+                num[i] = k % 10
+                k //= 10
+                i -= 1
+            else:
+                num.insert(0, k % 10)
+                k //= 10
 
-        ans = []
-        while n > 0:
-            ans.append(n % 10)
-            n //= 10
-
-        if not ans:
-            return [0]
-
-        return ans[::-1]
+        return num
