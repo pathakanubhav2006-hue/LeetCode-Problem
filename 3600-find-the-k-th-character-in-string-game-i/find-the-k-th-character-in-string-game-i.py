@@ -1,13 +1,15 @@
 class Solution(object):
     def kthCharacter(self, k):
-        s = 'a'
+        def solve(s):
+            if len(s) >= k:
+                return s[k - 1]
 
-        while len(s) < k:
             word = ''
-
             for i in range(len(s)):
                 word += chr(ord(s[i]) + 1)
 
             s += word
 
-        return s[k - 1]
+            return solve(s)
+
+        return solve('a')
