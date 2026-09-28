@@ -1,20 +1,22 @@
-class Solution(object):
+class Solution:
     def evaluate(self, s, knowledge):
-        mp = {k: v for k, v in knowledge}
-        res = []
-        key = []
-        inside = False
+        d = dict(knowledge)
+        result = []
+        i = 0
 
-        for ch in s:
-            if ch == '(':
-                inside = True
-                key = []
-            elif ch == ')':
-                res.append(mp.get("".join(key), "?"))
-                inside = False
-            elif inside:
-                key.append(ch)
+        while i < len(s):
+            if s[i] == '(':
+                j = s.find(')', i)
+                key = s[i + 1:j]
+
+                if key in d:
+                    result.append(d[key])
+                else:
+                    result.append('?')
+
+                i = j + 1
             else:
-                res.append(ch)
+                result.append(s[i])
+                i += 1
 
-        return "".join(res)
+        return ''.join(result)
