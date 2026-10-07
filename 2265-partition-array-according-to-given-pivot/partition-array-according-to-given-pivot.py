@@ -1,17 +1,19 @@
 class Solution(object):
     def pivotArray(self, nums, pivot):
-        LS=[]
-        RS=[]
-        count=0
-        for i in range(len(nums)):
-            if nums[i]==pivot:
-                count+=1
-            elif nums[i]<pivot:
-                LS.append(nums[i])
+        """
+        :type nums: List[int]
+        :type pivot: int
+        :rtype: List[int]
+        """
+        less_pivot, more_pivot = [], []
+        count_pivot = 0
+
+        for i, num in enumerate(nums):
+            if num > pivot:
+                more_pivot.append(num)
+            elif num < pivot:
+                less_pivot.append(num)
             else:
-                RS.append(nums[i])
-        
-        while(count):
-            LS.append(pivot)
-            count-=1
-        return (LS+RS)
+                count_pivot += 1
+
+        return less_pivot + [pivot] * count_pivot + more_pivot
